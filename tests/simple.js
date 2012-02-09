@@ -3,7 +3,8 @@ var knot = require('../'),
     port = 5000;
 
 knot.createServer(
-    knot.echo()
+//    knot.profiler(),
+//    knot.echo()
 ).listen(port);
 
 function test (port, ip, obj, callback){
@@ -33,5 +34,7 @@ function log (msg){
     if(!--count){
         console.log('Total: '+((new Date().getTime()-start)/1000)+'sec ('+port+' requests)');
         process.exit();
+    }else{
+//        console.log(msg);
     }
 }
