@@ -7,3 +7,8 @@ connect.createServer(
     connect.bodyParser(),
     knot.connect(8000)
 ).listen(8080);
+
+knot.createServer(
+    knot.profiler(),
+    knot.echo()
+).listen(8000);

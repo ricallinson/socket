@@ -1,6 +1,5 @@
 var knot = require('../'),
     net = require('net'),
-    microtime = require('microtime'),
     port = 5000;
 
 knot.createServer(
@@ -21,7 +20,7 @@ function test (port, ip, obj, callback){
 }
 
 var count = port,
-    start = microtime.now(),
+    start = new Date().getTime(),
     i;
 
 for(i=0;i<port;i++){
@@ -32,6 +31,7 @@ for(i=0;i<port;i++){
 
 function log (msg){
     if(!--count){
-        console.log('Total: '+(microtime.now()-start)+' ('+count+')');
+        console.log('Total: '+((new Date().getTime()-start)/1000)+'sec ('+port+' requests)');
+        process.exit();
     }
 }
