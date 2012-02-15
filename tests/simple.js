@@ -1,22 +1,35 @@
+
+/*!
+ * Knot
+ * Copyright(c) 2012 RS Allinson
+ * MIT Licensed
+ */
+
 var knot = require('../'),
     net = require('net'),
     port = 5000;
 
 knot.createServer(
-//    knot.profiler(),
+//    knot.profiler()
 //    knot.echo()
 ).listen(port);
 
 function test (port, ip, obj, callback){
     var buffer = '';
     var client = net.connect(port, ip, function() {
-        client.write(JSON.stringify(obj)+'\r\n');
+        client.write(JSON.stringify(obj)+knot.TERM);
     });
     client.on('data', function(data) {
-        buffer+= data.toString();
+        buffer+= data;
     });
     client.on('end', function() {
-        callback(JSON.parse(buffer));
+        var data;
+        try{
+            data = JSON.parse(buffer);
+        }catch(e){
+            data = {error:'bad json parse'};
+        }
+        callback(data);
     });
 }
 
