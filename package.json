@@ -1,0 +1,14 @@
+{
+    "name": "knot",
+    "description": "Knot",
+    "version": "0.1.0",
+    "main": "./lib/knot",
+    "author" : "Ric Allinson",
+    "engines" : {
+        "node" : ">=0.6.0"
+    },
+    "dependencies" : {
+        "avro" : "=0.1.0",
+        "microtime": "=0.2.0"
+    }
+}

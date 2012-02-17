@@ -5,7 +5,7 @@
  * MIT Licensed
  */
 
-var knot = require('../');
+var knot = require('knot');
 
 knot.createServer(
     knot.profiler(),
