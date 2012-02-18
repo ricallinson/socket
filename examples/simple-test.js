@@ -7,12 +7,13 @@
 
 var knot = require('knot'),
     net = require('net'),
+    microtime = require('microtime'),
     port = 8080,
     app;
 
 app = knot.createServer(
-//    knot.profiler(),
-//    knot.echo()
+    knot.profiler(),
+    knot.echo()
 ).listen(port);
 
 console.log('Knot Server Started');
@@ -36,9 +37,9 @@ function test (port, ip, obj, callback){
     });
 }
 
-var repeat = 5000,
+var repeat = 1000,
     count = repeat,
-    start = new Date().getTime(),
+    start = microtime.now(),
     i;
 
 for(i=0;i<count;i++){
@@ -49,9 +50,9 @@ for(i=0;i<count;i++){
 
 function log (msg){
     if(!--count){
-        console.log('Total: '+((new Date().getTime()-start)/1000)+'sec ('+port+' requests)');
+        console.log('Total: '+((microtime.now()-start)/1000000)+'sec ('+repeat+' requests)');
         process.exit();
     }else{
-        //console.log(msg);
+        console.log(msg);
     }
 }
