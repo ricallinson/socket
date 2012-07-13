@@ -26,4 +26,4 @@ var socket = require('../lib');
 socket.createServer(
     socket.profiler(),
     socket.echo()
-).listen(8000);
+).listen(3357);
