@@ -16,10 +16,10 @@ shipping with 4 bundled middleware modules.
 
 ## Middleware
 
-* _echo_ simple echo server
-* _json_ application/json parser
-* _profiler_ per-request time and memory profiler
-* _errorHandler_ flexible error handler
+* *echo* simple echo server
+* *json* application/json parser
+* *profiler* per-request time and memory profiler
+* *errorHandler* flexible error handler
 
 ## Inspiration
 
