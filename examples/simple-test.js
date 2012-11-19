@@ -28,7 +28,7 @@ var socket = require('../lib'),
     microtime = require('microtime'),
     port = 8080,
     app,
-    repeat = 1000,
+    repeat = 100,
     count = repeat,
     start = microtime.now(),
     i;
@@ -38,7 +38,7 @@ app = socket.createServer(
     socket.echo()
 ).listen(port);
 
-console.log('Knot Server Started');
+console.log('Socket Server Started');
 
 function test(port, ip, obj, callback) {
     var buffer = '',
