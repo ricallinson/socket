@@ -4,8 +4,17 @@
 "use strict";
 
 var assert = require("assert"),
-    socket = require("../");
+    socket = require("../"),
+    fs = require("fs"),
+    path = require("path");
 
+describe("socket version", function () {
+    it("should return true if versions are the same", function () {
+        var json = fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf8");
+        json = JSON.parse(json);
+        assert.equal(socket.version, json.version);
+    });
+});
 describe("socket", function () {
     it("should return a function", function () {
         assert.equal(typeof socket, "function");
