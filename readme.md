@@ -6,7 +6,6 @@ Socket is an extensible TCP server framework for node,
 shipping with 4 bundled middleware modules.
 
     var socket = require('socket');
-    
     socket.createServer(
         socket.profiler(),
         socket.echo()
