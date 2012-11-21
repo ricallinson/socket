@@ -21,6 +21,10 @@
 //    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 //    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+/*jshint node: true*/
+
+'use strict';
+
 var socket = require('../lib');
 
 socket.createServer(
