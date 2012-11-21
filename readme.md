@@ -1,5 +1,7 @@
 # Socket
 
+[![Build Status](https://secure.travis-ci.org/ricallinson/socket.png?branch=master)](http://travis-ci.org/ricallinson/socket)
+
 Socket is an extensible TCP server framework for node,
 shipping with 4 bundled middleware modules.
 
