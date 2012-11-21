@@ -25,54 +25,17 @@
 
 'use strict';
 
-var socket = require('../lib'),
-    net = require('net'),
-    microtime = require('microtime'),
-    port = 3737,
-    app,
-    repeat = 100,
-    count = repeat,
-    start = microtime.now(),
-    i;
+var socket = require('../lib');
+var app = socket.createServer();
 
-app = socket.createServer(
-    socket.profiler(),
-    socket.echo()
-).listen(port);
+app.use(socket.logger());
 
-console.log('Socket Server Started');
+app.use("time", function (req, res, next) {
+	res.end(new Date().getTime());
+});
 
-function test(port, ip, obj, callback) {
-    var buffer = '',
-        client;
+app.use("help", function help(req, res, next) {
+	res.end("time - Returns the number of milliseconds since midnight Jan 1, 1970.");
+});
 
-    client = net.connect(port, ip, function () {
-        client.write(JSON.stringify(obj) + app.TERM);
-    });
-    client.on('data', function (data) {
-        buffer += data;
-    });
-    client.on('end', function () {
-        var data;
-        try {
-            data = JSON.parse(buffer);
-        } catch (e) {
-            data = {error: 'bad json parse'};
-        }
-        callback(data);
-    });
-}
-
-function log(msg) {
-    count = count - 1;
-    if (!count) {
-        console.log('Total: ' + ((microtime.now() - start) / 1000000) + 'sec (' + repeat + ' requests)');
-        process.exit();
-    } else {
-        console.log(msg);
-    }
-}
-
-for (i = 0; i < count; i = i + 1) {
-    test(port, 'localhost', {num: i}, log);
-}
+app.listen(3737);
