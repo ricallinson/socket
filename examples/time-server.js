@@ -35,7 +35,8 @@ app.use("time", function (req, res, next) {
 });
 
 app.use("help", function help(req, res, next) {
-	res.end("time - Returns the number of milliseconds since midnight Jan 1, 1970.");
+	req.data = "";
+	res.write("time - Returns the number of milliseconds since midnight Jan 1, 1970.\n");
 });
 
 app.listen(3737);
