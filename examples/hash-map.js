@@ -25,9 +25,118 @@
 
 'use strict';
 
-var socket = require('../');
+var socket = require('../'),
+    now = require("microtime").now,
+    app,
+    res,
+    start,
+    entries = 1000000,
+    result = {
+        success: 0,
+        failure: 0,
+        other: 0
+    };
 
-socket.createServer(
-    socket.profiler(),
+/*
+    Write "count" entries
+*/
+
+function writeSampleItems(app, count, kb) {
+    var i,
+        v = "";
+
+    result = {
+        success: 0,
+        failure: 0,
+        other: 0
+    };
+
+    for (i = 0; i < kb * 1024; i += 1) {
+        v += "X";
+    }
+
+    for (i = 0; i <= count; i += 1) {
+        app.handle({data: "wkey-" + i + ":" + i + " " + v}, res);
+    }
+
+    console.log(result);
+}
+
+/*
+    Delete "count" entries
+*/
+
+function deleteSampleItems(app, count) {
+    var i;
+    for (i = 0; i <= count; i += 1) {
+        app.handle({data: "dkey-" + i}, res);
+    }
+}
+
+/*
+    Log Memory Usage
+*/
+
+function logMemoryUsage() {
+    var mem = process.memoryUsage();
+    console.log("Memory used: " + Math.round(mem.heapUsed / 1.049e+6) + "mb");
+}
+
+/*
+    Create our socket server
+*/
+
+app = socket.createServer(
     socket.hashMap()
-).listen(3737);
+);
+
+/*
+    Fake an end() function
+*/
+
+res = {
+    end: function (data) {
+        if (data === "0") {
+            result.success += 1;
+        } else if (data === "1") {
+            result.failure += 1;
+        } else {
+            result.other += 1;
+        }
+        // console.log(data);
+    }
+};
+
+/*
+    Add items
+*/
+
+console.log("");
+start = now();
+writeSampleItems(app, entries, 1);
+console.log("Time to add entries: " + ((now() - start) / 1000000) + "s");
+logMemoryUsage();
+
+/*
+    Get an item
+*/
+
+start = now();
+app.handle({data: "rkey-" + entries}, res);
+console.log("Time to read an entry: " + ((now() - start) / 1000000) + "s");
+
+/*
+    Delete Items
+*/
+
+start = now();
+deleteSampleItems(app, entries);
+console.log("Time to delete entries: " + ((now() - start) / 1000000) + "s");
+
+/*
+    Memory after GC
+*/
+
+setTimeout(function () {
+    logMemoryUsage();
+}, 1000);

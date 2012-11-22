@@ -25,7 +25,7 @@
 
 'use strict';
 
-var socket = require('../lib');
+var socket = require('../');
 var app = socket.createServer();
 
 app.use(socket.logger());

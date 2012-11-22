@@ -25,7 +25,7 @@
 
 'use strict';
 
-var socket = require('../lib'),
+var socket = require('../'),
     net = require('net'),
     microtime = require('microtime'),
     port = 3737,

@@ -25,7 +25,7 @@
 
 'use strict';
 
-var socket = require('../lib');
+var socket = require('../');
 
 socket.createServer(
     socket.profiler(),
