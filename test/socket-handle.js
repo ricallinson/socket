@@ -17,7 +17,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use(function(req, res, next) {
+        app.use(function (req, res, next) {
             result = true;
         });
 
@@ -32,7 +32,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("test", function(req, res, next) {
+        app.use("test", function (req, res, next) {
             result = true;
         });
 
@@ -47,7 +47,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("test", function(req, res, next) {
+        app.use("test", function (req, res, next) {
             result = true;
         });
 
@@ -62,7 +62,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("test", function(req, res, next) {
+        app.use("test", function (req, res, next) {
             result = true;
         });
 
@@ -77,7 +77,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("foo.bar", function(req, res, next) {
+        app.use("foo.bar", function (req, res, next) {
             result = true;
         });
 
@@ -92,7 +92,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("foo.bar", function(req, res, next) {
+        app.use("foo.bar", function (req, res, next) {
             result = true;
         });
 
@@ -107,12 +107,12 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = 0;
 
-        app.use(function(req, res, next) {
+        app.use(function (req, res, next) {
             result += 1;
             next();
         });
 
-        app.use(function(req, res, next) {
+        app.use(function (req, res, next) {
             result += 1;
         });
 
@@ -127,12 +127,12 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = 0;
 
-        app.use("test", function(req, res, next) {
+        app.use("test", function (req, res, next) {
             result += 1;
             next();
         });
 
-        app.use("test", function(req, res, next) {
+        app.use("test", function (req, res, next) {
             result += 1;
         });
 
@@ -147,16 +147,16 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = 0;
 
-        app.use("bad", function(req, res, next) {
+        app.use("bad", function (req, res, next) {
             result += 1;
         });
 
-        app.use(function(req, res, next) {
+        app.use(function (req, res, next) {
             result += 1;
             next();
         });
 
-        app.use("test", function(req, res, next) {
+        app.use("test", function (req, res, next) {
             result += 1;
         });
 

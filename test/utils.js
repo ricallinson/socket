@@ -26,4 +26,4 @@ describe("utils.keyExists(key, obj)", function () {
         assert.equal(utils.keyExists("a.c", obj), false);
         assert.equal(utils.keyExists("a.b.d", obj), false);
     });
-})
+});
