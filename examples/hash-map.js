@@ -115,6 +115,7 @@ console.log("");
 start = now();
 writeSampleItems(app, entries, 1);
 console.log("Time to add entries: " + ((now() - start) / 1000000) + "s");
+console.log("Throughput " + Math.round(entries / ((now() - start) / 1000000)) + " items per second");
 logMemoryUsage();
 
 /*
