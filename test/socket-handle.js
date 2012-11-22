@@ -102,7 +102,27 @@ describe("proto.handle()", function () {
         assert.equal(result, true);
     });
 
-    it("should return true when both the middlewares is matched to the string", function () {
+    it("should return true when both the middlewares are triggered", function () {
+
+        var app = socket.createServer(),
+            result = 0;
+
+        app.use(function(req, res, next) {
+            result += 1;
+            next();
+        });
+
+        app.use(function(req, res, next) {
+            result += 1;
+        });
+
+        app.handle({data: "test"}, res);
+
+        assert.equal(app.stack.length, 2);
+        assert.equal(result, 2);
+    });
+
+    it("should return true when both the middlewares are matched to the string", function () {
 
         var app = socket.createServer(),
             result = 0;
@@ -119,6 +139,30 @@ describe("proto.handle()", function () {
         app.handle({data: "test"}, res);
 
         assert.equal(app.stack.length, 2);
+        assert.equal(result, 2);
+    });
+
+    it("should return true when two middlewares are matched to the string", function () {
+
+        var app = socket.createServer(),
+            result = 0;
+
+        app.use("bad", function(req, res, next) {
+            result += 1;
+        });
+
+        app.use(function(req, res, next) {
+            result += 1;
+            next();
+        });
+
+        app.use("test", function(req, res, next) {
+            result += 1;
+        });
+
+        app.handle({data: "test"}, res);
+
+        assert.equal(app.stack.length, 3);
         assert.equal(result, 2);
     });
 });
