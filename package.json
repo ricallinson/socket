@@ -14,15 +14,16 @@
         "microtime": "*"
     },
     "devDependencies" : {
-        "jslint": "*",
-        "mocha": "*"
+        "jshint": "*",
+        "mocha": "*",
+        "istanbul": "*"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/capecodehq/socket.git"
     },
     "scripts": {
-        "test": "mocha ./test"
+        "test": "./test/run"
     },
     "license": "MIT"
 }

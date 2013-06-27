@@ -1,4 +1,3 @@
-/*jslint */
 /*global describe, it*/
 
 "use strict";
@@ -9,7 +8,7 @@ var assert = require("assert"),
 describe("proto.handle()", function () {
 
     var res = {
-            end: function (data) {}
+            end: function () {}
         };
 
     it("should return true when the middleware is run", function () {
@@ -17,7 +16,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use(function (req, res, next) {
+        app.use(function () {
             result = true;
         });
 
@@ -32,7 +31,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("test", function (req, res, next) {
+        app.use("test", function () {
             result = true;
         });
 
@@ -47,7 +46,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("test", function (req, res, next) {
+        app.use("test", function () {
             result = true;
         });
 
@@ -62,7 +61,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("test", function (req, res, next) {
+        app.use("test", function () {
             result = true;
         });
 
@@ -77,7 +76,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("foo.bar", function (req, res, next) {
+        app.use("foo.bar", function () {
             result = true;
         });
 
@@ -92,7 +91,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = false;
 
-        app.use("foo.bar", function (req, res, next) {
+        app.use("foo.bar", function () {
             result = true;
         });
 
@@ -112,7 +111,7 @@ describe("proto.handle()", function () {
             next();
         });
 
-        app.use(function (req, res, next) {
+        app.use(function () {
             result += 1;
         });
 
@@ -132,7 +131,7 @@ describe("proto.handle()", function () {
             next();
         });
 
-        app.use("test", function (req, res, next) {
+        app.use("test", function () {
             result += 1;
         });
 
@@ -147,7 +146,7 @@ describe("proto.handle()", function () {
         var app = socket.createServer(),
             result = 0;
 
-        app.use("bad", function (req, res, next) {
+        app.use("bad", function () {
             result += 1;
         });
 
@@ -156,7 +155,7 @@ describe("proto.handle()", function () {
             next();
         });
 
-        app.use("test", function (req, res, next) {
+        app.use("test", function () {
             result += 1;
         });
 
